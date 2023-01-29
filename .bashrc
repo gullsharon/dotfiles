@@ -1,11 +1,38 @@
 # .bashrc
 
-export PS1="[\u@\h \W]$"
 
-# User specific aliases and functions
+# Bash Prompt ##################################### {{{
+WHITE='\[\033[1;37m\]'
+LIGHTGRAY='\[\033[0;37m\]'
+GRAY='\[\033[1;30m\]'
+BLACK='\[\033[0;30m\]'
+RED='\[\033[0;31m\]'
+LIGHTRED='\[\033[1;31m\]'
+GREEN='\[\033[0;32m\]'
+LIGHTGREEN='\[\033[1;32m\]'
+BROWN='\[\033[0;33m\]' #Orange
+YELLOW='\[\033[1;33m\]'
+BLUE='\[\033[0;34m\]'
+LIGHTBLUE='\[\033[1;34m\]'
+PURPLE='\[\033[0;35m\]'
+PINK='\[\033[1;35m\]' #Light Purple
+CYAN='\[\033[0;36m\]'
+LIGHTCYAN='\[\033[1;36m\]'
+DEFAULT='\[\033[0m\]'
+
+export PS1="$GREEN[$RED\u$GREEN@$BLUE\h $PURPLE\W$GREEN]\$$DEFAULT"
+# }}}
+
+
+# Protect from some mistakes by running commands in interactive mode
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# Function to get PID of root SSHD process (useful in case of too many processes opening
+function pidssh() {
+	ps -ef | grep /usr/sbin | grep ssh | awk '{ print $2 }'
+}
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
