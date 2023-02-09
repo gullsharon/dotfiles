@@ -20,7 +20,7 @@ CYAN='\[\033[0;36m\]'
 LIGHTCYAN='\[\033[1;36m\]'
 DEFAULT='\[\033[0m\]'
 
-export PS1="$GREEN[$RED\u$GREEN@$BLUE\h $PURPLE\W$GREEN]\$$DEFAULT"
+export PS1="$RED\u$GREEN@$BLUE\h$PURPLE[\W]$GREEN\$$DEFAULT"
 # }}}
 
 
@@ -45,7 +45,9 @@ if [ -f ~/.bashrc_local ]; then
 fi
 
 # Git tab autocomplete
-source /usr/share/bash-completion/completions/git
+if [ -f /usr/share/bash-completion/completions/git ]; then
+	. /usr/share/bash-completion/completions/git
+fi
 
 # Adds date and time to commands in history
 HISTTIMEFORMAT="%F %T "

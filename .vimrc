@@ -14,7 +14,7 @@ set smartindent
 set softtabstop=4
 set shiftwidth=4
 set copyindent
-colorscheme delek
+" colorscheme delek
 set wildmenu
 set history=1000
 set hidden
@@ -23,6 +23,71 @@ filetype plugin on
 set nocompatible
 set ignorecase
 set smartcase
+
+
+
+
+" PLUGINS ------------------------------------------------------- {{{
+let g:ale_completion_enabled = 1
+
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes
+
+" use :PlugInstall after adding new plugins and reloading vimrc!
+Plug 'dense-analysis/ale'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-fugitive'
+Plug 'kshenoy/vim-signature'
+Plug 'airblade/vim-gitgutter'
+
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+" You can revert the settings after the call like so:
+"   filetype indent off   " Disable file-type-specific indentation
+"   syntax off            " Disable syntax highlighting
+
+
+" Solarized theme
+" set termguicolors
+set t_Co=256
+let g:solarized_termtrans = 1
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+highlight clear SignColumn
+
+" ale configurations
+nmap <silent> <C-e> <Plug>(ale_next_wrap)
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? 'OK' : printf(
+        \   '%d⨉ %d⚠ ',
+        \   all_non_errors,
+        \   all_errors
+        \)
+endfunction
+
+" Avoid linting on opening file (because it's confusing)
+let g:ale_lint_on_enter = 0
+
+" to counteract no linting on opening files, this line lints on save, even if
+" no changes were made
+let g:ale_lint_on_save = 1
+
+
+" }}}
 
 
 " STATUS LINE ------------------------------------------------------------ {{{
@@ -67,6 +132,8 @@ set statusline+=%2*\ %Y\                                 " FileType
 set statusline+=%3*│                                     " Separator
 set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
 set statusline+=\ (%{&ff})                               " FileFormat (dos/unix..)
+set statusline+=\ \\|									 " Seperator
+set statusline+=\ %{LinterStatus()}						 " Ale errors/warnings
 set statusline+=%=                                       " Right Side
 set statusline+=%2*\ col:\ %02v\                         " Colomn number
 set statusline+=%3*│                                     " Separator
