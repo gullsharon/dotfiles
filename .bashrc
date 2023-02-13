@@ -68,6 +68,7 @@ function hg() {
 }
 
 # Shortcuts to vimrc and bashrc
+alias nvimrc='nvim ~/dotfiles/init.vim'
 alias vimrc='vim ~/dotfiles/.vimrc'
 alias bashrc='vim ~/dotfiles/.bashrc'
 alias bashrclocal='vim ~/.bashrc_local'

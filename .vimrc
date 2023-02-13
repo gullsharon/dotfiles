@@ -23,9 +23,8 @@ filetype plugin on
 set nocompatible
 set ignorecase
 set smartcase
-
-
-
+set updatetime=200
+autocmd FileType gitcommit set colorcolumn=51,73
 
 " PLUGINS ------------------------------------------------------- {{{
 let g:ale_completion_enabled = 1
@@ -47,6 +46,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
 Plug 'kshenoy/vim-signature'
 Plug 'airblade/vim-gitgutter'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
