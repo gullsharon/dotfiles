@@ -19,7 +19,7 @@ set mouse=a			" enable mouse click
 set clipboard=unnamedplus	" using system clipboard
 filetype on
 filetype plugin on
-" set cursorline		" highlight current cursorline
+set cursorline			" highlight current cursorline
 set ttyfast			" Speed up scrolling in Vim
 set scrolloff=10		" keeps a few lines visible after and before current line
 set showcmd			" shows the partial command you are typing while typing it
@@ -39,9 +39,7 @@ autocmd FileType gitcommit set colorcolumn=50,72
 " Plugin Section ------------------------------------------------------ {{{
 call plug#begin("~/.vim/plugged")
 " Use :PlugInstall to install plugins after changing list
-Plug 'EdenEast/nightfox.nvim'					" colorscheme
-Plug 'nvim-lualine/lualine.nvim'				" statusline
-Plug 'kyazdani42/nvim-web-devicons'				" icons in statusline
+Plug 'navarasu/EdenEast/nightfox.nvim'				" colorscheme
 Plug 'neoclide/coc.nvim', {'branch': 'release'}			" plugin that interfaces with language server
 Plug 'airblade/vim-gitgutter'					" shows git changes in the gutter
 Plug 'kshenoy/vim-signature'					" shows marks in the gutter
@@ -173,8 +171,51 @@ colorscheme nordfox
 
 
 " STATUS LINE ------------------------------------------------------------ {{{
-lua << END
-require('lualine').setup()
-END
+" status bar colors
+au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
+au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+
+" Status line
+" default: set statusline=%f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
+
+" Status Line Custom
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'Normal·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ '^V' : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
+    \}
+
+set laststatus=2
+set noshowmode
+set statusline=
+set statusline+=%0*\ %n\					" Buffer number
+set statusline+=%1*\ %<%F%m%r%h%w\				" File path, modified, readonly, helpfile, preview
+set statusline+=%3*│						" Separator
+set statusline+=%2*\ %Y\					" FileType
+set statusline+=%3*│						" Separator
+set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}		" Encoding
+set statusline+=\ (%{&ff})					" FileFormat (dos/unix..)
+set statusline+=%=						" Right Side
+set statusline+=%2*\ col:\ %02v\				" Colomn number
+set statusline+=%3*│						" Separator
+set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\			" Line number / total lines, percentage of document
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\		" The current mode
 " }}}
 

@@ -86,3 +86,5 @@ function cgrepl() {
 	grep -rl "$1" --color=always | grep "\.c" --color=never
 }
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

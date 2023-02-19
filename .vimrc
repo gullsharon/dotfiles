@@ -8,11 +8,11 @@ set showmatch
 set ruler
 set wildmenu
 set wildmode=longest,list,full
-set tabstop=4
+set tabstop=8
 set autoindent
 set smartindent
-set softtabstop=4
-set shiftwidth=4
+set softtabstop=8
+set shiftwidth=8
 set copyindent
 " colorscheme delek
 set wildmenu
