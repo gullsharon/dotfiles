@@ -174,7 +174,15 @@ colorscheme nordfox
 
 " STATUS LINE ------------------------------------------------------------ {{{
 lua << END
-require('lualine').setup()
+require('lualine').setup {
+	options = {
+		icons_enabled = false,
+		theme = 'codedark',
+		refresh = {
+			statusline = 200,
+		}
+	}
+}
 END
 " }}}
 
