@@ -26,7 +26,9 @@ set showcmd			" shows the partial command you are typing while typing it
 set history=1000		" keeps undo history
 set updatetime=200		" faster updating
 set guicursor=			" fixes bug where commands insert random `q` character
-
+set list			" show whitespace
+set lcs+=space:·		" choose space character
+set lcs+=tab:——⇥		" choose tab character
 " open new split panes to right and below
 set splitright
 set splitbelow
