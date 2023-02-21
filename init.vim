@@ -28,7 +28,10 @@ set updatetime=200		" faster updating
 set guicursor=			" fixes bug where commands insert random `q` character
 set list			" show whitespace
 set lcs+=space:·		" choose space character
-set lcs+=tab:——⇥		" choose tab character
+set lcs+=trail:·		" choose trailing space character
+"set lcs+=tab:——⇥		" choose tab character
+"set lcs+=eol:¬			" choose eol character
+
 " open new split panes to right and below
 set splitright
 set splitbelow
@@ -49,7 +52,7 @@ Plug 'airblade/vim-gitgutter'					" shows git changes in the gutter
 Plug 'kshenoy/vim-signature'					" shows marks in the gutter
 Plug 'tpope/vim-fugitive'					" allows git commands in vim
 Plug 'preservim/nerdcommenter'					" allows commenting and uncommenting blocks
-Plug 'lukas-reineke/indent-blankline.nvim'			" addes indentation guides to all lines
+Plug 'lukas-reineke/indent-blankline.nvim'			" adds indentation guides to all lines
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}	" parser (which allows syntax highlighting)
 Plug 'farmergreg/vim-lastplace'					" saves cursor position, folding, and other related things on nvim close
 call plug#end()
