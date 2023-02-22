@@ -18,6 +18,7 @@ PURPLE='\[\033[0;35m\]'
 PINK='\[\033[1;35m\]' #Light Purple
 CYAN='\[\033[0;36m\]'
 LIGHTCYAN='\[\033[1;36m\]'
+BOLD='\[\033[1m\]'
 DEFAULT='\[\033[0m\]'
 
 # For showing repository status
@@ -25,25 +26,35 @@ function parse_git_dirty {
 	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo "*"
 }
 function parse_git_branch {
-	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
 function set_ps1() {
 	PS1=""
-	PS1+="$RED\u"			# user name
-	PS1+="$GREEN@"			# seperator
-	PS1+="$BLUE\h"			# current machine
-	PS1+="$PURPLE[\W]"		# working directory
-	PS1+="$CYAN$(parse_git_branch)"	# show current git branch and dirty status
-	PS1+="$GREEN\$"			# show # if sudo, $ otherwise
-	PS1+="$DEFAULT"			# make commands normal color
+	# PS1+="$RED👤\u"
+	PS1+="$RED\u"				# user name
+	PS1+="$GREEN@"				# seperator
+	# PS1+="$BLUE💻\h"
+	PS1+="$BLUE\h"				# current machine
+	PS1+="$PURPLE[📁\W]"			# working directory
+
+	git_string=$(parse_git_branch)
+	if [ -n "$git_string" ]; then		# git project exists
+		color="$CYAN"			# color of git section
+		PS1+="$color($color"	# git symbol
+		PS1+="$git_string)"
+	fi
+
+	PS1+="$GREEN\$"				# show # if sudo, $ otherwise
+	PS1+="$DEFAULT"				# make commands normal color
+	export PS1
 }
 
 export PROMPT_COMMAND='set_ps1'
 # }}}
 
 # Use whichever editor exists
-function edit {
+function v {
 	if command -v nvim > /dev/null; then
 		nvim "$@"
 	else
@@ -95,10 +106,10 @@ function hg() {
 }
 
 # Shortcuts to vimrc and bashrc
-alias nvimrc='edit ~/dotfiles/init.vim'
-alias vimrc='edit ~/dotfiles/.vimrc'
-alias bashrc='edit ~/dotfiles/.bashrc'
-alias bashrclocal='edit ~/.bashrc_local'
+alias nvimrc='v ~/dotfiles/init.vim'
+alias vimrc='v ~/dotfiles/.vimrc'
+alias bashrc='v ~/dotfiles/.bashrc'
+alias bashrclocal='v ~/.bashrc_local'
 alias loadbash='source ~/.bashrc'
 
 # Ctags
