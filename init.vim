@@ -1,7 +1,8 @@
 " basic configuration ------------------------------------------------- {{{
 set nocompatible		" disable compatibility to old-time vi
 set showmatch			" show matching
-set ignorecase			" case insensitive
+set ignorecase			" case insensitive search
+set smartcase			" case sensitive search if includes capital
 set mouse=v			" middle-click paste with
 set hlsearch			" highlight search
 set incsearch			" incremental search
@@ -38,6 +39,11 @@ set splitbelow
 
 " custom colorcolumn for git commits
 autocmd FileType gitcommit set colorcolumn=50,72
+
+" change Home button behavior to first jump to first non-whitespace character,
+" and only when pressed again, go to the start of the line
+nnoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? '0' : '^'
+inoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? "\<C-O>0" : "\<C-O>^"
 " }}}
 
 
@@ -65,26 +71,26 @@ set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
+	\ coc#pum#visible() ? coc#pum#next(1) :
+	\ CheckBackspace() ? "\<Tab>" :
+	\ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
-  	let col = col('.') - 1
-  	return !col || getline('.')[col - 1]  =~# '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+	inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+	inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -102,11 +108,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
-  	if CocAction('hasProvider', 'hover')
-    	call CocActionAsync('doHover')
-  	else
-    	call feedkeys('K', 'in')
-  	endif
+	if CocAction('hasProvider', 'hover')
+	call CocActionAsync('doHover')
+	else
+	call feedkeys('K', 'in')
+	endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor
@@ -119,25 +125,28 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all" (the four listed parsers should always be installed)
-	ensure_installed = { "c", "lua", "vim", "help" },
+	ensure_installed = { "c", "lua", "vim", "help", "bash", "cmake", "cpp",
+			     "dockerfile", "gitcommit", "git_rebase",
+			     "gitattributes", "make", "markdown",
+			     "markdown_inline", "python", "regex", },
 
-	 -- Install parsers synchronously (only applied to `ensure_installed`)
-	 sync_install = false,
+	-- Install parsers synchronously (only applied to `ensure_installed`)
+	sync_install = false,
 
-	 -- Automatically install missing parsers when entering buffer
-	 -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-	 auto_install = false,
+	-- Automatically install missing parsers when entering buffer
+	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+	auto_install = false,
 
-	 highlight = {
-	    -- `false` will disable the whole extension
-	    enable = true,
+	highlight = {
+		-- `false` will disable the whole extension
+		enable = true,
 
-	    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-	    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-	    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-	    -- Instead of true it can also be a list of languages
-	    additional_vim_regex_highlighting = false,
-	 },
+		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+		-- Using this option may slow down your editor, and you may see some duplicate highlights.
+		-- Instead of true it can also be a list of languages
+		additional_vim_regex_highlighting = false,
+	},
 }
 EOF
 
