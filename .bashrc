@@ -67,6 +67,9 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
+# Grep case insensitive and without binary files
+alias grep='grep --ignore-case --binary-files=without-match --color=always'
+
 # Function to get PID of root SSHD process (useful in case of too many processes opening
 function pidssh() {
 	ps -ef | grep /usr/sbin | grep ssh | awk '{ print $2 }'
