@@ -50,6 +50,7 @@ inoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? "\<C-O>0" : "
 " Plugin Section ------------------------------------------------------ {{{
 call plug#begin("~/.vim/plugged")
 " Use :PlugInstall to install plugins after changing list
+Plug 'crispgm/nvim-tabline'					" adds tabline
 Plug 'EdenEast/nightfox.nvim'					" colorscheme
 Plug 'nvim-lualine/lualine.nvim'				" statusline
 Plug 'kyazdani42/nvim-web-devicons'				" icons in statusline
@@ -117,6 +118,25 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+" }}}
+
+
+" tabline plugin -------------------------------------------------------- {{{
+lua <<EOF
+require('tabline').setup({
+	show_index = true,		-- show tab index
+	show_modify = true,		-- show buffer modification indicator
+	show_icon = false,		-- show file extension icon
+	modify_indicator = '+',		-- modify indicator
+	no_name = 'No name',		-- no name buffer name
+	brackets = { '', '' },		-- file name brackets surrounding
+})
+EOF
+" leader+t to open new tab.
+" gt/gT to navigate tabs.
+" leader +x to close current tab.
+nnoremap <leader>t :tabedit %<CR>
+nnoremap <leader>x :tabclose<CR>
 " }}}
 
 
