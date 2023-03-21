@@ -67,8 +67,31 @@ call plug#end()
 
 
 " coc.nvim plugin ------------------------------------------------------- {{{
+" Go to coc specific settings by using :CocConfig
+
 " Always show the signcolumn, otherwise it would shift the text each time diagnostics appear/become resolved
 set signcolumn=yes
+
+" Configure coc.nvim
+let g:coc_global_extensions = ['coc-clangd']
+
+" Enable diagnostic messages
+augroup coc_lsp
+	autocmd!
+	autocmd User CocJumpPlaceholderInitialized silent! call CocActionAsync('runCommand', 'editor.action.showReferences')
+augroup END
+
+" Set up coc-clangd settings
+let g:coc_settings = json_decode(get(g:, 'coc_settings', '{}'))
+let g:coc_settings['clangd'] = {
+	\ "arguments": ["--background-index", "--clang-tidy"],
+	\ "checkUpdates": "true",
+	\ "enableSnippetInsertion": "true",
+	\ "suggest": {
+		\ "includeSnippet": "true"
+	\ },
+	\ "fallbackFlags": ["-std=c++17"]
+\ }
 
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
