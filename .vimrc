@@ -25,6 +25,7 @@ set ignorecase
 set smartcase
 set updatetime=200
 autocmd FileType gitcommit set colorcolumn=51,73
+set clipboard+=unnamedplus		" using system clipboard
 
 " PLUGINS ------------------------------------------------------- {{{
 let g:ale_completion_enabled = 1
