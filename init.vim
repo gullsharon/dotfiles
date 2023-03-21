@@ -158,7 +158,7 @@ EOF
 " leader+t to open new tab.
 " gt/gT to navigate tabs.
 " leader +x to close current tab.
-nnoremap <leader>t :tabedit %<CR>
+nnoremap <leader>t :tab split<CR>
 nnoremap <leader>x :tabclose<CR>
 " }}}
 
