@@ -41,7 +41,7 @@ function set_ps1() {
 	git_string=$(parse_git_branch)
 	if [ -n "$git_string" ]; then		# git project exists
 		color="$CYAN"			# color of git section
-		PS1+="$color($color"	# git symbol
+		PS1+="$color("			# git symbol
 		PS1+="$git_string)"
 	fi
 
@@ -62,6 +62,15 @@ function v {
 	fi
 }
 
+# Print a word from a certain column of the output when piping.
+# Example: cat /path/to/file.txt | fawk 2 --> Print every 2nd word in each line.
+function fawk {
+	first="awk '{print "
+	last="}'"
+	cmd="${first}\$${1}${last}"
+	eval $cmd
+}
+
 # Protect from some mistakes by running commands in interactive mode
 alias rm='rm -i'
 alias cp='cp -i'
@@ -69,6 +78,9 @@ alias mv='mv -i'
 
 # Grep case insensitive and without binary files
 alias grep='grep --ignore-case --binary-files=without-match --color=always'
+
+# ls with human-readable format
+alias ll='ls -lh --color=auto'
 
 # Function to get PID of root SSHD process (useful in case of too many processes opening
 function pidssh() {
@@ -94,8 +106,8 @@ fi
 HISTTIMEFORMAT="%F %T "
 
 # Makes history remember longer
-HISTSIZE=2000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # Appends history instead of overwriting
 shopt -s histappend
