@@ -86,15 +86,6 @@ augroup END
 
 " Set up coc-clangd settings
 let g:coc_settings = json_decode(get(g:, 'coc_settings', '{}'))
-let g:coc_settings['clangd'] = {
-	\ "arguments": ["--background-index", "--clang-tidy"],
-	\ "checkUpdates": "true",
-	\ "enableSnippetInsertion": "true",
-	\ "suggest": {
-		\ "includeSnippet": "true"
-	\ },
-	\ "fallbackFlags": ["-std=c++17"]
-\ }
 
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>

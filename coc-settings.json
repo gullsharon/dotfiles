@@ -1,13 +1,37 @@
 {
-	"clangd.path": "clangd",
-	"clangd.arguments": [
-		"--background-index",
-		"--header-insertion=never"
-	],
-  "diagnostic": {
-    "enable": true,
-    "displayByType": true,
-    "messageTarget": "floatwin",
-  }
+	"clangd": {
+		"path": "clangd",			// LSP path
+		"arguments": [
+			"--background-index",		// causes file indexing to happen in background instead of on file open
+			"--header-insertion=never",	// don't auto-add includes for functions used
+			"--clang-tidy",			// use clang-tidy for linting
+		],
+		"checkUpdates": "true",
+		"enableSnippetInsertion": "true",
+		"suggest": {
+			"includeSnippet": "true",
+		},
+		"fallbackFlags": ["-std=c++17",],
+		"diagnostics": {
+			"onParse": true,		// run diagnostics when the LSP parses the file
+			"onCodeComplete": true,		// run diagnostics on code completion
+		},
+	},
+	"coc": {
+		"preferences.formatOptions": {		// options for CoC autoformatting, which isn't currently used
+			"tabSize": 8,
+			"insertSpaces": false,		// use spaces instead of tabs
+		},
+		"source.clangd": {
+			"enable": true,			// enable clangd as the LSP
+			"completeOption": {		// options for code completion suggestions
+				"spell": true,		// spelling
+				"detail": true,		// display detailed information about completion suggestions
+			},
+			"diagnostics": true,		// enables diagnostics
+			"highlight": true,		// enables syntax highlighting
+		},
+	},
+	"suggest.maxCompleteItemCount": 10,		// limit number of completion suggestions
 }
 
