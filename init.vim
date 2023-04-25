@@ -32,7 +32,7 @@ set lcs+=space:·		" choose space character
 set lcs+=trail:·		" choose trailing space character
 "set lcs+=tab:——⇥		" choose tab character
 "set lcs+=eol:¬			" choose eol character
-
+set cino=(0,0,0,0),(0,0,0),(0,0,0),(0)	" sets indendation of function definitions and calls
 " open new split panes to right and below
 set splitright
 set splitbelow
@@ -46,6 +46,9 @@ nnoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? '0' : '^'
 inoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? "\<C-O>0" : "\<C-O>^"
 " }}}
 
+" Show Trailing Whitespaces
+highlight ExtraWhitespace ctermbg=Brown guibg=Cyan
+match ExtraWhitespace /\s\+$/
 
 " Plugin Section ------------------------------------------------------ {{{
 call plug#begin("~/.vim/plugged")

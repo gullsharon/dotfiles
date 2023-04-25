@@ -1,0 +1,13 @@
+{
+	"clangd.path": "clangd",
+	"clangd.arguments": [
+		"--background-index",
+		"--header-insertion=never"
+	],
+  "diagnostic": {
+    "enable": true,
+    "displayByType": true,
+    "messageTarget": "floatwin",
+  }
+}
+

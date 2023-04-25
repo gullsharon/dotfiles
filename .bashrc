@@ -36,7 +36,8 @@ function set_ps1() {
 	PS1+="$GREEN@"				# seperator
 	# PS1+="$BLUE💻\h"
 	PS1+="$BLUE\h"				# current machine
-	PS1+="$PURPLE[📁\W]"			# working directory
+	# PS1+="$PURPLE[📁\W]"			# working directory
+	PS1+="$PURPLE[\W]"			# working directory
 
 	git_string=$(parse_git_branch)
 	if [ -n "$git_string" ]; then		# git project exists

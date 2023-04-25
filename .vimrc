@@ -27,6 +27,12 @@ set updatetime=200
 autocmd FileType gitcommit set colorcolumn=51,73
 set clipboard+=unnamedplus		" using system clipboard
 
+" change Home button behavior to first jump to first non-whitespace character,
+" and only when pressed again, go to the start of the line
+nnoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? '0' : '^'
+inoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? "\<C-O>0" : "\<C-O>^"
+" }}}
+
 " PLUGINS ------------------------------------------------------- {{{
 let g:ale_completion_enabled = 1
 
