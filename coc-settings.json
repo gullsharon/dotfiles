@@ -6,7 +6,6 @@
 			"--header-insertion=never",	// don't auto-add includes for functions used
 			"--clang-tidy",			// use clang-tidy for linting
 		],
-		"checkUpdates": "true",
 		"enableSnippetInsertion": "true",
 		"suggest": {
 			"includeSnippet": "true",
