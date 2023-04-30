@@ -58,6 +58,7 @@ Plug 'EdenEast/nightfox.nvim'					" colorscheme
 Plug 'nvim-lualine/lualine.nvim'				" statusline
 Plug 'kyazdani42/nvim-web-devicons'				" icons in statusline
 Plug 'neoclide/coc.nvim', {'branch': 'release'}			" plugin that interfaces with language server
+Plug 'dense-analysis/ale'					" warns of bad code style
 Plug 'airblade/vim-gitgutter'					" shows git changes in the gutter
 Plug 'kshenoy/vim-signature'					" shows marks in the gutter
 Plug 'tpope/vim-fugitive'					" allows git commands in vim
@@ -137,6 +138,11 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
+" ale plugin ------------------------------------------------------------ {{{
+let g:ale_linters = {
+	\ 'c': ['clang', 'gcc'],
+	\ }
+" }}}
 
 " tabline plugin -------------------------------------------------------- {{{
 lua <<EOF
@@ -163,7 +169,7 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all" (the four listed parsers should always be installed)
 	ensure_installed = { "c", "lua", "vim", "help", "bash", "cmake", "cpp",
-			     "dockerfile", "gitcommit", "git_rebase",
+			     "comment", "dockerfile", "gitcommit", "git_rebase",
 			     "gitattributes", "make", "markdown",
 			     "markdown_inline", "python", "regex", },
 
