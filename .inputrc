@@ -1,0 +1,8 @@
+$include /etc/inputrc
+
+# adds character to suggestions, indicating file type.
+set visible-stats On
+
+# shift+tab to cycle through completion suggestions
+"\e[Z": menu-complete
+

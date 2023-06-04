@@ -116,14 +116,10 @@ shopt -s histappend
 # Ignore duplicates in history
 export HISTCONTROL=ignoredups
 
-# Function to search history for some string
-function hg() {
-	history | grep "$1";
-}
-
 # Shortcuts to vimrc and bashrc
 alias nvimrc='v ~/dotfiles/init.vim'
 alias vimrc='v ~/dotfiles/.vimrc'
+alias inputrc='v ~/dotfiles/.inputrc'
 alias bashrc='v ~/dotfiles/.bashrc'
 alias bashrclocal='v ~/.bashrc_local'
 alias loadbash='source ~/.bashrc'
