@@ -44,11 +44,12 @@ autocmd FileType gitcommit set colorcolumn=50,72
 " and only when pressed again, go to the start of the line
 nnoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? '0' : '^'
 inoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? "\<C-O>0" : "\<C-O>^"
-" }}}
 
 " Show Trailing Whitespaces
 highlight ExtraWhitespace ctermbg=Brown guibg=Cyan
 match ExtraWhitespace /\s\+$/
+" }}}
+
 
 " Plugin Section ------------------------------------------------------ {{{
 call plug#begin("~/.vim/plugged")
@@ -65,7 +66,8 @@ Plug 'tpope/vim-fugitive'					" allows git commands in vim
 Plug 'preservim/nerdcommenter'					" allows commenting and uncommenting blocks
 Plug 'lukas-reineke/indent-blankline.nvim'			" adds indentation guides to all lines
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}	" parser (which allows syntax highlighting)
-Plug 'farmergreg/vim-lastplace'					" saves cursor position, folding, and other related things on nvim close
+Plug 'farmergreg/vim-lastplace',				" saves cursor position, folding, and other related things on nvim close
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }		" fuzzy search
 call plug#end()
 " }}}
 
@@ -138,11 +140,13 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
+
 " ale plugin ------------------------------------------------------------ {{{
 let g:ale_linters = {
 	\ 'c': ['clang', 'gcc'],
 	\ }
 " }}}
+
 
 " tabline plugin -------------------------------------------------------- {{{
 lua <<EOF
@@ -220,7 +224,13 @@ let g:NERDCommentEmptyLines = 1
 " }}}
 
 
-" color schemes --------------------------------------------------------- {{{
+" fzf plugin ------------------------------------------------------------- {{{
+" make control+T in normal mode activate fuzzy file search
+nnoremap <silent> <C-t> :FZF<CR>
+" }}}
+
+
+" color schemes ---------------------------------------------------------- {{{
 if (has("termguicolors"))
 	set termguicolors
 endif
