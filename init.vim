@@ -241,6 +241,11 @@ colorscheme nordfox
 
 " STATUS LINE ------------------------------------------------------------ {{{
 lua << END
+-- Custom component to display total number of lines
+local function line_count()
+	return vim.fn.line('$') .. ' lines'
+end
+
 require('lualine').setup {
 	options = {
 		icons_enabled = false,
@@ -248,6 +253,14 @@ require('lualine').setup {
 		refresh = {
 			statusline = 200,
 		}
+	},
+	sections = {
+		lualine_a = {'mode'},
+		lualine_b = {'branch', 'diff', 'diagnostics'},
+		lualine_c = {'filename'},
+		lualine_x = {'encoding', 'fileformat', 'filetype'},
+		lualine_y = {'progress', line_count},
+		lualine_z = {'location'}
 	}
 }
 END
