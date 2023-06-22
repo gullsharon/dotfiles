@@ -1,37 +1,7 @@
-set number
-set incsearch
-syntax on
-set mouse=a
-set scrolloff=10
-set showcmd
-set showmatch
-set ruler
-set wildmenu
-set wildmode=longest,list,full
-set tabstop=8
-set autoindent
-set smartindent
-set softtabstop=8
-set shiftwidth=8
-set copyindent
-" colorscheme delek
-set wildmenu
-set history=1000
-set hidden
-filetype on
-filetype plugin on
-set nocompatible
-set ignorecase
-set smartcase
-set updatetime=200
-autocmd FileType gitcommit set colorcolumn=51,73
-set clipboard+=unnamedplus		" using system clipboard
+source ~/dotfiles/common.vim
 
-" change Home button behavior to first jump to first non-whitespace character,
-" and only when pressed again, go to the start of the line
-nnoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? '0' : '^'
-inoremap <expr> <Home> col('.') == match(getline('.'), '\S') + 1 ? "\<C-O>0" : "\<C-O>^"
-" }}}
+set ruler
+set hidden
 
 " PLUGINS ------------------------------------------------------- {{{
 let g:ale_completion_enabled = 1
