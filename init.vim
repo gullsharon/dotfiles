@@ -1,5 +1,13 @@
+" Basic configuration ------------------------------------------------- {{{
 " Imports settings shared with vim
 source ~/dotfiles/common.vim
+
+set list			" show whitespace
+set lcs+=space:·		" choose space character
+set lcs+=trail:·		" choose trailing space character
+"set lcs+=tab:——⇥		" choose tab character
+"set lcs+=eol:¬			" choose eol character
+" }}}
 
 
 " Plugin Section ------------------------------------------------------ {{{
