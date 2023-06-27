@@ -23,6 +23,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
 Plug 'kshenoy/vim-signature'
 Plug 'airblade/vim-gitgutter'
+Plug 'henrik/vim-indexed-search'		" shows number of matches when searching
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Initialize plugin system

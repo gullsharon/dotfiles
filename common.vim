@@ -35,6 +35,9 @@ set cino=(0,0,0,0),(0,0,0),(0,0,0),(0)	" sets indendation of function definition
 set splitright
 set splitbelow
 
+" use spaces instead of tabs, only in python files
+autocmd FileType python setlocal expandtab
+
 " custom colorcolumn for git commits
 autocmd FileType gitcommit set colorcolumn=50,72
 
