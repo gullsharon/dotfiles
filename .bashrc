@@ -119,6 +119,7 @@ export HISTCONTROL=ignoredups
 # Shortcuts to vimrc and bashrc
 alias nvimrc='v ~/dotfiles/init.vim'
 alias vimrc='v ~/dotfiles/.vimrc'
+alias vimcommon='v ~/dotfiles/common.vim'
 alias inputrc='v ~/dotfiles/.inputrc'
 alias bashrc='v ~/dotfiles/.bashrc'
 alias bashrclocal='v ~/.bashrc_local'
