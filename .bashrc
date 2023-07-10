@@ -1,5 +1,14 @@
 # .bashrc
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Source local bashrc
+if [ -f ~/.bashrc_local ]; then
+	. ~/.bashrc_local
+fi
 
 # Bash Prompt ##################################### {{{
 WHITE='\[\033[1;37m\]'
@@ -54,7 +63,7 @@ function set_ps1() {
 export PROMPT_COMMAND='set_ps1'
 # }}}
 
-# Use whichever editor exists
+# v <filename>: Use whichever editor exists to edit file
 function v {
 	if command -v nvim > /dev/null; then
 		nvim "$@"
@@ -88,16 +97,6 @@ function pidssh() {
 	ps -ef | grep /usr/sbin | grep ssh | awk '{ print $2 }'
 }
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
-# Source local bashrc
-if [ -f ~/.bashrc_local ]; then
-	. ~/.bashrc_local
-fi
-
 # Git tab autocomplete
 if [ -f /usr/share/bash-completion/completions/git ]; then
 	. /usr/share/bash-completion/completions/git
@@ -128,15 +127,6 @@ alias loadbash='source ~/.bashrc'
 # Ctags
 alias gentags='ctags -R .'
 
-# Functions to grep c/cpp files only
-function cgrep() {
-	grep -r "$1" --color=always | grep "\.c" --color=never
-}
-
-function cgrepl() {
-	grep -rl "$1" --color=always | grep "\.c" --color=never
-}
-
 # Bash Function To Extract File Archives Of Various Types
 extract () {
      if [ -f $1 ] ; then
@@ -159,5 +149,6 @@ extract () {
      fi
 }
 
-
+# fzf for fuzzy file finding
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
