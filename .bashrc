@@ -87,7 +87,10 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # Grep case insensitive and without binary files
-alias grep='grep --ignore-case --binary-files=without-match --color=always'
+alias grepi='grep --ignore-case --binary-files=without-match --color=always'
+
+# Grep case sensitive and without binary files
+alias grep='grep --binary-files=without-match --color=always'
 
 # ls with human-readable format
 alias ll='ls -lh --color=auto'
