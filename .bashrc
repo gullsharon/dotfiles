@@ -90,7 +90,7 @@ alias mv='mv -i'
 alias grepi='grep --ignore-case --binary-files=without-match --color=always'
 
 # Grep case sensitive and without binary files
-alias grep='grep --binary-files=without-match --color=always'
+alias grep='grep --binary-files=without-match --color=auto'
 
 # ls with human-readable format
 alias ll='ls -lh --color=auto'
@@ -122,6 +122,7 @@ export HISTCONTROL=ignoredups
 alias nvimrc='v ~/dotfiles/init.vim'
 alias vimrc='v ~/dotfiles/.vimrc'
 alias vimcommon='v ~/dotfiles/common.vim'
+alias vimrclocal='v ~/.vimrc_local'
 alias inputrc='v ~/dotfiles/.inputrc'
 alias bashrc='v ~/dotfiles/.bashrc'
 alias bashrclocal='v ~/.bashrc_local'

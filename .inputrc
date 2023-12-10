@@ -4,5 +4,5 @@ $include /etc/inputrc
 set visible-stats On
 
 # shift+tab to cycle through completion suggestions
-"\e[Z": menu-complete
+"\e[Z": menu-complete-backward
 

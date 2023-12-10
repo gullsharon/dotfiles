@@ -28,7 +28,7 @@ set ttyfast			" Speed up scrolling in Vim
 set scrolloff=10		" keeps a few lines visible after and before current line
 set showcmd			" shows the partial command you are typing while typing it
 set history=1000		" keeps undo history
-set updatetime=200		" faster updating
+set updatetime=300		" faster updating
 set guicursor=			" fixes bug where commands insert random `q` character
 set cino=(0,0,0,0),(0,0,0),(0,0,0),(0)	" sets indendation of function definitions and calls
 " open new split panes to right and below
@@ -53,7 +53,10 @@ match ExtraWhitespace /\s\+$/
 " use shift + up/down to move current line
 nnoremap <S-Up> :m-2<CR>
 nnoremap <S-Down> :m+<CR>
-inoremap <S-Up> <Esc>:m-2<CR>
-inoremap <S-Down> <Esc>:m+<CR>
+inoremap <S-Up> <Esc>:m-2<CR>gi
+inoremap <S-Down> <Esc>:m+<CR>gi
 " }}}
+
+" Load local vim configurations
+source ~/.vimrc_local
 
