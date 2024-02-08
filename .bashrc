@@ -31,6 +31,16 @@ BOLD='\[\033[1m\]'
 DEFAULT='\[\033[0m\]'
 
 # For showing repository status
+DISPLAY_GIT_ON_PS1=true
+
+function toggle_git_prompt {
+	if [ "$DISPLAY_GIT_ON_PS1" = true ]; then
+		DISPLAY_GIT_ON_PS1=false
+	else
+		DISPLAY_GIT_ON_PS1=true
+	fi
+}
+
 function parse_git_dirty {
 	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo "*"
 }
@@ -48,11 +58,13 @@ function set_ps1() {
 	# PS1+="$PURPLE[📁\W]"			# working directory
 	PS1+="$PURPLE[\W]"			# working directory
 
-	git_string=$(parse_git_branch)
-	if [ -n "$git_string" ]; then		# git project exists
-		color="$CYAN"			# color of git section
-		PS1+="$color("			# git symbol
-		PS1+="$git_string)"
+	if [ "$DISPLAY_GIT_ON_PS1" = true ]; then
+		git_string=$(parse_git_branch)
+		if [ -n "$git_string" ]; then		# git project exists
+			color="$CYAN"			# color of git section
+			PS1+="$color("			# git symbol
+			PS1+="$git_string)"
+		fi
 	fi
 
 	PS1+="$GREEN\$"				# show # if sudo, $ otherwise
