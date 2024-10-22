@@ -97,6 +97,9 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Rename a variable/field in struct
+nmap <leader>r <Plug>(coc-rename)
 " }}}
 
 

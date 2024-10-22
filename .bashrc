@@ -35,8 +35,10 @@ DISPLAY_GIT_ON_PS1=true
 
 function toggle_git_prompt {
 	if [ "$DISPLAY_GIT_ON_PS1" = true ]; then
+		echo "Git display off"
 		DISPLAY_GIT_ON_PS1=false
 	else
+		echo "Git display on"
 		DISPLAY_GIT_ON_PS1=true
 	fi
 }
@@ -99,7 +101,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # Grep case insensitive and without binary files
-alias grepi='grep --ignore-case --binary-files=without-match --color=always'
+alias grepi='grep -nIir --exclude={tags,configure} --exclude-dir={man,coverity,doc,autom4te.cache,.deps} --color=auto'
 
 # Grep case sensitive and without binary files
 alias grep='grep --binary-files=without-match --color=auto'

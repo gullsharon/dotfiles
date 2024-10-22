@@ -16,7 +16,7 @@ set autoindent			" indent a new line the same amount as the line just typed
 set number			" add line numbers
 set wildmenu			" show completion suggestions
 set wildmode=longest,list	" get bash-like tab completions
-set cc=80			" set an 80 column border for good coding style
+set cc=100			" set a 100 column border for good coding style
 filetype plugin indent on	" allow auto-indenting depending on file type
 syntax on			" syntax highlighting
 set clipboard+=unnamedplus	" using system clipboard
